@@ -6,6 +6,72 @@
     <title>Git Favoritos</title>
   </head>
   <body>
-    
+    <div id="app">
+      <header>
+        <img src="./Assets/Gitfav.svg" alt="logo da Git Fav" />
+        <div class="search">
+          <label class="sr-only" for="input-search"
+            >Digite o Github username</label
+          >
+          <input
+            type="text"
+            id="input-search"
+            placeholder="Digite o Github username"
+          />
+          <button>
+            <img src="./Assets/star.svg" alt="foto estrela" />
+            Favoritar
+          </button>
+        </div>
+      </header>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Usuário</th>
+            <th>Repositories</th>
+            <th>Seguidores</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="user">
+              <img
+                src="http://github.com/leogeison.png"
+                alt="Imagem de Léo Geison"
+              />
+              <a href="http://github.com/leogeison" target="_blank">
+                <p>Léo Geison</p>
+                <span>leogeison</span>
+              </a>
+            </td>
+            <td class="repositories">15</td>
+            <td class="followers">30</td>
+            <td class="remove">
+              <button>Remover</button>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="user">
+              <img
+                src="http://github.com/GilmarJr99.png"
+                alt="Imagem de Gilmar"
+              />
+              <a href="https://github.com/GilmarJr99" target="_blank">
+                <p>Gilmar Junior</p>
+                <span>GilmarJr99</span>
+              </a>
+            </td>
+            <td class="repositories">06</td>
+            <td class="followers">10</td>
+            <td class="remove">
+              <button>Remover</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </body>
 </html>
