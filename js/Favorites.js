@@ -1,3 +1,18 @@
+export class GithubUser {
+  static search(username) {
+    const endpoint = `https://api.github.com/users/${username}`
+
+    return fetch(endpoint)
+      .then(data => data.json())
+      .then(({ login, name, public_repos, followers }) => ({
+        login,
+        name,
+        public_repos,
+        followers
+      }))
+  }
+}
+
 // Classe que vai conter a lógica dos dados
 export class Favorites {
   constructor(root) {
@@ -5,19 +20,45 @@ export class Favorites {
 
     this.load()
   }
-  
+
   load() {
     this.entries = JSON.parse(localStorage.getItem('@github-favorites:')) || []
-    console.log(this.entries)
+  }
+
+  save() {
+    localStorage.setItem('@github-favorites:', JSON.stringify(this.entries))
+  }
+
+  async add(username) {
+    try {
+      const userExists = this.entries.find(entry => entry.login === username)
+
+      if (userExists) {
+        throw new Error('Usuario já cadastrado')
+      }
+
+      const user = await GithubUser.search(username)
+
+      if (user.login === undefined) {
+        throw new Error('Usuario não encontrado!')
+      }
+
+      this.entries = [user, ...this.entries]
+      this.update()
+      this.save()
+    } catch (error) {
+      alert(error.message)
+    }
   }
 
   delete(user) {
-    const filteredEntries = this.entries.filter(entry => entry.login !== user.login)
+    const filteredEntries = this.entries.filter(
+      entry => entry.login !== user.login
+    )
 
     this.entries = filteredEntries
     this.update()
-
-    
+    this.save()
   }
 }
 
@@ -28,6 +69,17 @@ export class FavoritesViews extends Favorites {
     super(root)
     this.tbody = this.root.querySelector('table tbody')
     this.update()
+
+    this.onAdd()
+  }
+
+  onAdd() {
+    const addButton = this.root.querySelector('.search button')
+    addButton.onclick = () => {
+      const { value } = this.root.querySelector('.search input')
+
+      this.add(value)
+    }
   }
 
   update() {
@@ -53,8 +105,6 @@ export class FavoritesViews extends Favorites {
       }
 
       this.tbody.append(row)
-     
-      
     })
   }
 
