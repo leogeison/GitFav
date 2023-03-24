@@ -26,7 +26,7 @@ body * {
 }
 
 #app {
-  max-width: 1440px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
 }
@@ -99,6 +99,29 @@ header {
 }
 .search button:hover svg path {
   fill: #065e7c;
+}
+
+tbody {
+  display: block;
+  max-height: 40rem;
+  overflow: auto;
+  overflow-x: hidden;
+
+  border-radius: 0 0 1.2rem 1.2rem;
+}
+
+tbody::-webkit-scrollbar {
+  width: 0.6rem;
+  background: transparent;
+}
+
+tbody::-webkit-scrollbar-thumb {
+  background: #4a808c;
+  border-radius: 1rem;
+}
+
+tbody::-webkit-scrollbar-track {
+  background-color: transparent;
 }
 
 thead,
@@ -184,6 +207,27 @@ td.user span {
 }
 .remove button:hover {
   color: #c0202e;
+}
+
+td.empty-table {
+  height: 30rem;
+
+  color: #4e5455;
+  text-align: center;
+}
+
+td.empty-table p {
+  font-family: 'Roboto Mono';
+  font-weight: 700;
+  font-size: 4rem;
+  line-height: 2.5rem;
+}
+
+.empty-table div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
 }
 
 @media (max-width: 830px) {
